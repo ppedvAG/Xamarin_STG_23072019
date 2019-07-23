@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HalloAndroid", "HalloAndroid\HalloAndroid.csproj", "{5C8B8FE4-49D1-4F9A-B01E-709E8957029C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C8B8FE4-49D1-4F9A-B01E-709E8957029C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C8B8FE4-49D1-4F9A-B01E-709E8957029C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C8B8FE4-49D1-4F9A-B01E-709E8957029C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5C8B8FE4-49D1-4F9A-B01E-709E8957029C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C8B8FE4-49D1-4F9A-B01E-709E8957029C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C8B8FE4-49D1-4F9A-B01E-709E8957029C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {835ADBEF-3971-4C9F-8262-C685F4B6796F}
+	EndGlobalSection
+EndGlobal
