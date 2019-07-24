@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="HalloXForm.MainPage">
+
+    <StackLayout>
+        <!-- Place new controls here -->
+        <Label  Text="Welcome to Xamarin.Forms!"           HorizontalOptions="Center"
+           VerticalOptions="Start" >
+
+            <Label.TextColor>
+                <OnPlatform x:TypeArguments="Color">
+                    <On Platform="Android">Green</On>
+                    <On Platform="UWP">Red</On>
+                </OnPlatform>
+            </Label.TextColor>
+        </Label>
+        <Button Text="Klick mich!" Clicked="ZeigeName" />
+        <Entry Placeholder="Hier Name rein!" x:Name="tb1" />
+        <Entry Placeholder="PWD" IsPassword="True" />
+        <SearchBar />
+        <Editor Placeholder="Notiz..." HeightRequest="100"/>
+
+        <Switch  IsToggled="True"/>
+        <ProgressBar Progress="0.7"/>
+        <Stepper Minimum="0" Maximum="10"/>
+
+        <Slider />
+        <DatePicker/>
+        <TimePicker />
+
+        <Picker>
+            <Picker.Items>
+                <x:String>Pizza</x:String>
+                <x:String>Schnitzel</x:String>
+                <x:String>Salat</x:String>
+                <x:String>Nudel</x:String>
+            </Picker.Items>
+        </Picker>
+
+        <BoxView BackgroundColor="Red" />
+
+
+
+        <ActivityIndicator IsRunning="True"/>
+
+    </StackLayout>
+
+</ContentPage>
