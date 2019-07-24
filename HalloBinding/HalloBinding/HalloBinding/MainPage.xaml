@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:HalloBinding"
+             mc:Ignorable="d"
+             x:Class="HalloBinding.MainPage">
+    <ContentPage.Resources>
+        <local:ToggleToColorConverter x:Key="boolToColorConv"/>
+    </ContentPage.Resources>
+    <StackLayout>
+
+        <Entry x:Name="tb1" />
+        <Entry  Text="{Binding Source={x:Reference tb1},Path=Text,Mode=TwoWay}"/>
+
+        <Slider x:Name="sl1" Maximum="360" Minimum="0" />
+        <Label FontSize="{Binding Source={Reference sl1},Path=Value}" Text="{Binding Source={Reference sl1},Path=Value,StringFormat='Der Wert ist {0:00.00}'}"/>
+
+        <Label>Pink/Azureblou</Label>
+        <Switch x:Name="sw1" IsToggled="True" />
+        <BoxView  HorizontalOptions="Center"
+            BackgroundColor="{Binding Source={x:Reference sw1},Path=IsToggled,Converter={StaticResource boolToColorConv}}"
+            WidthRequest="60" HeightRequest="60" Rotation="{Binding Source={Reference sl1},Path=Value}"/>
+
+        <ListView x:Name="lv1">
+            <ListView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Rind</x:String>
+                    <x:String>Schwein</x:String>
+                    <x:String>Huhn</x:String>
+                    <x:String>Känguguu</x:String>
+                </x:Array>
+            </ListView.ItemsSource>
+        </ListView>
+
+        <Label Text="{Binding Source={Reference lv1},Path=SelectedItem}"/>
+        <Label Text="{Binding Source={Reference lv1},Path=SelectedItem.Length}"/>
+
+    </StackLayout>
+
+</ContentPage>
