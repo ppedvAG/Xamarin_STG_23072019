@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:HalloStyle"
+             mc:Ignorable="d"
+             x:Class="HalloStyle.MainPage">
+    <ContentPage.Resources>
+        <Style x:Key="myStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="PeachPuff"/>
+            <Setter Property="TextColor" Value="Crimson"/>
+            <Setter Property="FontSize" Value="Large"/>
+            <Style.Triggers>
+                <Trigger TargetType="Button" Property="IsFocused" Value="true">
+                    <Setter Property="BackgroundColor" Value="Chartreuse"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource myStyle}">
+            <Setter Property="BackgroundColor" Value="{OnPlatform Android=Lime,iOS=Pink,UWP=Yellow}"/>
+        </Style>
+
+        <Style TargetType="Entry">
+            <Setter Property="BackgroundColor" Value="SeaGreen"/>
+            <Style.Triggers>
+                <Trigger TargetType="Entry" Property="Text" Value="">
+                    <Setter Property="BackgroundColor" Value="red"/>
+                </Trigger>
+                <EventTrigger Event="TextChanged">
+                    <local:EmailValidationTriggerAction/>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </ContentPage.Resources>
+    <StackLayout>
+        <Button Text="Button" Style="{StaticResource myStyle}"/>
+        <Button Text="Button" Style="{StaticResource myStyle}"/>
+        <Button Text="Button" />
+        <Button Text="Button" />
+        <Entry Text=""/>
+        <Entry />
+    </StackLayout>
+
+</ContentPage>
