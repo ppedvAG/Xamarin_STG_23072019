@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="HalloNavigation.NavPage">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="🏠" Clicked="GoHome"/>
+            <Button Text="MainPage" Clicked="ShowMainPage" />
+            <Button Text="Die Tabbed Page" Clicked="ShowTabPage" />
+            <Button Text="Das Karussell" Clicked="Karussell" />
+            <Button Text="🔙" Clicked="goBack"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    
+        <StackLayout>
+            <Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+
+</ContentPage>
