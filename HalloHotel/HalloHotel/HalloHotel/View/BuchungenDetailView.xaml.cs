@@ -1,5 +1,4 @@
-﻿using HalloHotel.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,12 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace HalloHotel.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class BuchungenView : ContentPage
+    public partial class BuchungenDetailView : ContentPage
     {
-        public BuchungenView()
+        public BuchungenDetailView()
         {
             InitializeComponent();
-            //this.Appearing += (s, e) => ((BuchungenViewModel)BindingContext).Reload();
         }
     }
 }

@@ -3,7 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
+using System.Linq;
 using System.Windows.Input;
+using System.Xml.Serialization;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace HalloHotel.ViewModel
@@ -27,6 +31,11 @@ namespace HalloHotel.ViewModel
             }
         }
 
+        internal void Reload()
+        {
+            Application.Current.MainPage.DisplayAlert("AA", "BB", "kk");
+        }
+
         public string TageInfo
         {
             get
@@ -46,8 +55,11 @@ namespace HalloHotel.ViewModel
         }
 
 
-        public ICommand AddNewBuchungCommand { get; set; }
+        public Command AddNewBuchungCommand { get; set; }
         public Command RemoveSelectedBuchungCommand { get; set; }
+        public Command ShowDetailsCommand { get; set; }
+        public Command XmlWriteCommand { get; set; }
+        public Command XmlReadCommand { get; set; }
 
         public BuchungenViewModel()
         {
@@ -56,7 +68,46 @@ namespace HalloHotel.ViewModel
 
             AddNewBuchungCommand = new Command(UserWantsToAddNewBuchung);
             RemoveSelectedBuchungCommand = new Command(UserWantsToRemoveSelectedBuchung, CanDeleteBuchung);
-            //RemoveSelectedBuchungCommand = new Command(UserWantsToRemoveSelectedBuchung, o => SelectedBuchung?.Datum.Date >= DateTime.Now.Date);
+            ShowDetailsCommand = new Command(UserWantsToSeeDetails);
+
+            XmlWriteCommand = new Command(UserWantsToWriteXML);
+            XmlReadCommand = new Command(UserWantsToReadXML);
+        }
+
+        private void UserWantsToReadXML(object obj)
+        {
+            var filePath = Path.Combine(FileSystem.CacheDirectory, xmlFileName);
+            using (var sr = File.OpenRead(filePath))
+            {
+                var serial = new XmlSerializer(typeof(List<Buchung>));
+                var loaded = (List<Buchung>)serial.Deserialize(sr);
+                BuchungsListe.Clear();
+                loaded.ForEach(x => BuchungsListe.Add(x));
+            }
+        }
+
+        string xmlFileName = "buchungen.xml";
+
+        private async void UserWantsToWriteXML(object obj)
+        {
+            var filePath = Path.Combine(FileSystem.CacheDirectory, xmlFileName);
+            using (var sw = File.OpenWrite(filePath))
+            {
+                var serial = new XmlSerializer(typeof(List<Buchung>));
+                serial.Serialize(sw, BuchungsListe.ToList());
+            }
+            if (await Application.Current.MainPage.DisplayAlert("", filePath, "copy", "ok"))
+                await Clipboard.SetTextAsync(filePath);
+        }
+
+        private async void UserWantsToSeeDetails(object obj)
+        {
+
+            var view = new View.BuchungenDetailView();
+            ((BuchungenDetailsViewModel)view.BindingContext).SelectedBuchung = (Buchung)obj;
+            await Application.Current.MainPage.Navigation.PushModalAsync(view);
+
+
         }
 
         private bool CanDeleteBuchung(object arg)

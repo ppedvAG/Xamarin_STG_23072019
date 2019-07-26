@@ -9,6 +9,6 @@ namespace HalloHotel.Model
         public string Name { get; set; }
         public decimal PreisProNacht { get; set; }
         public string Ort { get; set; }
-        public ICollection<Buchung> Buchungen { get; set; } = new HashSet<Buchung>();
+        public HashSet<Buchung> Buchungen { get; set; } = new HashSet<Buchung>();
     }
 }

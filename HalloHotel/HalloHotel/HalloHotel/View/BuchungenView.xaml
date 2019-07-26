@@ -21,6 +21,8 @@
                 <Button Text="Demo daten" IsEnabled="False"/>
                 <Button Text="➕" Command="{Binding AddNewBuchungCommand}"/>
                 <Button Text="➖"  Command="{Binding RemoveSelectedBuchungCommand}"/>
+                <Button Text="XML Schreiben" Command="{Binding XmlWriteCommand}" />
+                <Button Text="XML Lesen"  Command="{Binding XmlReadCommand}"/>
             </StackLayout>
             <Label Grid.Row="1" Text="{Binding TageInfo}"/>
             <dg:DataGrid  SelectedItem="{Binding SelectedBuchung}" Grid.Row="2" VerticalOptions="FillAndExpand" ItemsSource="{Binding BuchungsListe}">
@@ -44,7 +46,7 @@
                                 <StackLayout Orientation="Horizontal">
                                     <Button Text="🗑" Command="{Binding Source={x:Reference mySelf},Path=BindingContext.RemoveSelectedBuchungCommand}" 
                                                        CommandParameter="{Binding .}" />
-                                    <Button Text="🖊" />
+                                    <Button Text="🖊" Command="{Binding Source={x:Reference mySelf},Path=BindingContext.ShowDetailsCommand}"  CommandParameter="{Binding .}" />
                                 </StackLayout>
                             </DataTemplate>
                         </dg:DataGridColumn.CellTemplate>
