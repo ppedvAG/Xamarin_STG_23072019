@@ -13,17 +13,19 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackLayout Grid.Row="0"  Orientation="Horizontal" >
+            <FlexLayout Wrap="Wrap" Grid.Row="0" >
                 <Button Text="Demo daten" IsEnabled="False"/>
                 <Button Text="➕" Command="{Binding AddNewBuchungCommand}"/>
                 <Button Text="➖"  Command="{Binding RemoveSelectedBuchungCommand}"/>
                 <Button Text="XML Schreiben" Command="{Binding XmlWriteCommand}" />
                 <Button Text="XML Lesen"  Command="{Binding XmlReadCommand}"/>
-            </StackLayout>
+                <Button Text="🍷 SQLite sichern" Command="{Binding SqlWriteCommand}" />
+                <Button Text="🍷 SQLite lesen" Command="{Binding SqlReadCommand}" />
+            </FlexLayout>
             <Label Grid.Row="1" Text="{Binding TageInfo}"/>
             <dg:DataGrid  SelectedItem="{Binding SelectedBuchung}" Grid.Row="2" VerticalOptions="FillAndExpand" ItemsSource="{Binding BuchungsListe}">
                 <dg:DataGrid.Columns>

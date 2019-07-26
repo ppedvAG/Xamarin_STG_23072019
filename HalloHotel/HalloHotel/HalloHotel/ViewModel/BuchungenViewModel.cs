@@ -1,4 +1,5 @@
-﻿using HalloHotel.Model;
+﻿using HalloHotel.Data;
+using HalloHotel.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -60,6 +61,8 @@ namespace HalloHotel.ViewModel
         public Command ShowDetailsCommand { get; set; }
         public Command XmlWriteCommand { get; set; }
         public Command XmlReadCommand { get; set; }
+        public Command SqlWriteCommand { get; set; }
+        public Command SqlReadCommand { get; set; }
 
         public BuchungenViewModel()
         {
@@ -72,6 +75,26 @@ namespace HalloHotel.ViewModel
 
             XmlWriteCommand = new Command(UserWantsToWriteXML);
             XmlReadCommand = new Command(UserWantsToReadXML);
+
+            SqlWriteCommand = new Command(UserWantsToWriteSQL);
+            SqlReadCommand = new Command(UserWantsToReadSQL);
+        }
+
+        private async void UserWantsToReadSQL(object obj)
+        {
+            var filePath = Path.Combine(FileSystem.CacheDirectory, dbFileName);
+
+            Datamanager dm = new Datamanager(filePath);
+            BuchungsListe.Clear();
+            (await dm.ReadBuchungenAsync()).ForEach(x => BuchungsListe.Add(x));
+        }
+
+        private void UserWantsToWriteSQL(object obj)
+        {
+            var filePath = Path.Combine(FileSystem.CacheDirectory, dbFileName);
+
+            Datamanager dm = new Datamanager(filePath);
+            BuchungsListe.ToList().ForEach(x => dm.SaveBuchungAsync(x));
         }
 
         private void UserWantsToReadXML(object obj)
@@ -87,6 +110,7 @@ namespace HalloHotel.ViewModel
         }
 
         string xmlFileName = "buchungen.xml";
+        string dbFileName = "hotel.db3";
 
         private async void UserWantsToWriteXML(object obj)
         {

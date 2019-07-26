@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 
 namespace HalloHotel.Model
 {
@@ -9,7 +10,9 @@ namespace HalloHotel.Model
         private string bNummer;
         private DateTime datum;
 
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+
         public DateTime Datum
         {
             get => datum;
@@ -46,7 +49,6 @@ namespace HalloHotel.Model
                 MeChanged();
             }
         }
-        public Hotel Hotel { get; set; }
         public decimal GesamtPreis { get; set; }
     }
 }
