@@ -23,6 +23,7 @@ namespace HalloHotel.ViewModel
                 selectedBuchung = value;
                 MeChanged();
                 OnPropertyChanged(nameof(TageInfo));
+                RemoveSelectedBuchungCommand.ChangeCanExecute();
             }
         }
 
@@ -46,6 +47,7 @@ namespace HalloHotel.ViewModel
 
 
         public ICommand AddNewBuchungCommand { get; set; }
+        public Command RemoveSelectedBuchungCommand { get; set; }
 
         public BuchungenViewModel()
         {
@@ -53,6 +55,24 @@ namespace HalloHotel.ViewModel
             LadeDemodaten();
 
             AddNewBuchungCommand = new Command(UserWantsToAddNewBuchung);
+            RemoveSelectedBuchungCommand = new Command(UserWantsToRemoveSelectedBuchung, CanDeleteBuchung);
+            //RemoveSelectedBuchungCommand = new Command(UserWantsToRemoveSelectedBuchung, o => SelectedBuchung?.Datum.Date >= DateTime.Now.Date);
+        }
+
+        private bool CanDeleteBuchung(object arg)
+        {
+            if (arg != null && arg is Buchung b)
+                return b?.Datum.Date >= DateTime.Now.Date;
+            else
+                return SelectedBuchung?.Datum.Date >= DateTime.Now.Date;
+        }
+
+        private void UserWantsToRemoveSelectedBuchung(object obj)
+        {
+            if (obj != null && obj is Buchung b)
+                BuchungsListe.Remove(b);
+            else
+                BuchungsListe.Remove(SelectedBuchung);
         }
 
         private void UserWantsToAddNewBuchung(object obj)
