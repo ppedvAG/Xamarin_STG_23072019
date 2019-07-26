@@ -1,7 +1,10 @@
 ﻿using HalloHotel.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace HalloHotel.ViewModel
 {
@@ -10,7 +13,7 @@ namespace HalloHotel.ViewModel
         private Buchung selectedBuchung;
 
 
-        public List<Buchung> BuchungsListe { get; set; }
+        public ObservableCollection<Buchung> BuchungsListe { get; set; }
 
         public Buchung SelectedBuchung
         {
@@ -41,12 +44,30 @@ namespace HalloHotel.ViewModel
             }
         }
 
+
+        public ICommand AddNewBuchungCommand { get; set; }
+
         public BuchungenViewModel()
         {
-            BuchungsListe = new List<Buchung>();
+            BuchungsListe = new ObservableCollection<Buchung>();
             LadeDemodaten();
+
+            AddNewBuchungCommand = new Command(UserWantsToAddNewBuchung);
         }
 
+        private void UserWantsToAddNewBuchung(object obj)
+        {
+            var b = new Buchung()
+            {
+                Datum = DateTime.Now,
+                Gast = "Fred",
+                BNummer = $"B00-00{BuchungsListe.Count + 1}",
+                Naechte = 1,
+                GesamtPreis = 100m
+            };
+            BuchungsListe.Add(b);
+            SelectedBuchung = b;
+        }
 
         private void LadeDemodaten()
         {
